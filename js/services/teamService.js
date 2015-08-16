@@ -19,4 +19,9 @@ angular.module('app').service('TeamService', function () {
     this.getPlayers = function () {
         return players;
     };
+
+    this.resetData = function () {
+        teamName = '';
+        players = [];
+    }
 });
