@@ -3,6 +3,7 @@
 
 <input type="text" ng-model="newTeamPlayer"/>
 <button ng-click="addNewPlayer()">Add Player</button>
+<button ng-click="makeMatch()">Make match</button>
 
 <ul ng-repeat="player in players track by $index">
     <li>{{player}}</li>
