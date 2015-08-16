@@ -1,1 +1,9 @@
-<h1>team {{team}}</h1>
+<h1>Your team name: {{team}}</h1>
+<h2>Total players: {{playerNumber}}</h2>
+
+<input type="text" ng-model="newTeamPlayer"/>
+<button ng-click="addNewPlayer()">Add Player</button>
+
+<ul ng-repeat="player in players track by $index">
+    <li>{{player}}</li>
+</ul>
