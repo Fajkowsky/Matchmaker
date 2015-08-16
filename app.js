@@ -7,5 +7,9 @@ app.config(function($routeProvider) {
             when('/', {
                 templateUrl: 'templates/name.html',
                 controller: 'NameCtrl'
+            }).
+            when('/team', {
+                templateUrl: 'templates/team.html',
+                controller: 'TeamCtrl'
             });
 });
