@@ -2,31 +2,43 @@
 
 angular.module('app').controller('TeamCtrl', function($scope, $location, TeamService) {
     $scope.team = TeamService.getName();
-    $scope.players = [];
-    $scope.newTeamPlayer = '';
+    var players = $scope.players = [];
+    $scope.newTeamPlayer = $scope.matchError = '';
     $scope.playerNumber = $scope.players.length;
-    $scope.showFormError = false;
-    $scope.showMatchError = false;
-    $scope.playerCountError = 'Too few players';
+    $scope.showFormError = $scope.showMatchError = false;
+
+    function setError (msg) {
+        $scope.showMatchError = true;
+        $scope.matchError = msg;
+    }
+
+    function disableError () {
+        $scope.showMatchError = false;
+        $scope.matchError = '';
+    }
 
     $scope.addNewPlayer = function () {
         var playerName = $scope.newTeamPlayer;
-        var players = $scope.players;
 
         if (TeamService.emptyValidation(playerName)) {
-            $scope.players.push(playerName);
-            $scope.playerNumber = players.length;
+            if (TeamService.checkIfUnique(playerName, players)) {
+                disableError();
+
+                $scope.players.push(playerName);
+                $scope.playerNumber = players.length;
+            }
+            else {
+                setError('Player already added.');
+            }
         }
         $scope.showFormError = true;
     };
 
     $scope.makeMatch = function () {
-        var players = $scope.players;
-
         if(players.length > 1) {
             TeamService.savePlayers(players);
             $location.url('/match');
         }
-        $scope.showMatchError = true;
+        setError('Too few players');
     };
 });

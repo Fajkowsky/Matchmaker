@@ -27,5 +27,16 @@ angular.module('app').service('TeamService', function () {
 
     this.emptyValidation = function (name) {
         return name !== '';
+    };
+
+    this.checkIfUnique = function (item, array) {
+        if (array.length) {
+            for (var i in array) {
+                if (array[i] === item) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 });

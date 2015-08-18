@@ -7,7 +7,7 @@
 <button ng-click="addNewPlayer()">Add Player</button>
 <button ng-click="makeMatch()">Make match</button>
 <reset-data></reset-data>
-<div ng-show="showMatchError">{{playerCountError}}</div>
+<div ng-show="showMatchError">{{matchError}}</div>
 
 <ul ng-repeat="player in players track by $index">
     <li>{{player}}</li>
