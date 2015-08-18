@@ -2,9 +2,17 @@
 
 angular.module('app').controller('NameCtrl', function ($scope, $location, TeamService) {
     $scope.teamName = '';
+    $scope.showError = false;
 
     $scope.saveName = function () {
-        TeamService.saveName($scope.teamName);
-        $location.url('/team');
+        var name = $scope.teamName;
+
+        if (TeamService.emptyValidation(name)) {
+            TeamService.saveName(name);
+            $location.url('/team');
+        }
+        else {
+            $scope.showError = true;
+        }
     };
 });

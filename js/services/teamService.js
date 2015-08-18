@@ -23,5 +23,9 @@ angular.module('app').service('TeamService', function () {
     this.resetData = function () {
         teamName = '';
         players = [];
+    };
+
+    this.emptyValidation = function (name) {
+        return name !== '';
     }
 });
