@@ -2,5 +2,5 @@
 <form name="nameForm">
     <input type="text" name="teamName" ng-model="nameCtrl.teamName" required/>
     <span class="error" ng-show="nameForm.teamName.$error.required && nameCtrl.showError">Required!</span>
+    <button type="submit" ng-click="nameCtrl.saveName()">Save team</button>
 </form>
-<button ng-click="nameCtrl.saveName()">Save team</button>
