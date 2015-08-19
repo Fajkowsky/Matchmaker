@@ -1,5 +1,5 @@
 <h1>Your team name: {{team}}</h1>
-<h2>Total players: {{playerNumber}}</h2>
+<h2>Total players: {{players.length}}</h2>
 <form name="playerForm">
     <input type="text" name="playerName" ng-model="newTeamPlayer" required/>
     <div ng-show="showFormError && playerForm.playerName.$error.required">Required</div>

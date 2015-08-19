@@ -4,7 +4,6 @@ angular.module('app').controller('TeamCtrl', function($scope, $location, TeamSer
     $scope.team = TeamService.getName();
     var players = $scope.players = [];
     $scope.newTeamPlayer = $scope.matchError = '';
-    $scope.playerNumber = $scope.players.length;
     $scope.showFormError = $scope.showMatchError = false;
 
     function setError (msg) {
@@ -18,20 +17,18 @@ angular.module('app').controller('TeamCtrl', function($scope, $location, TeamSer
     }
 
     $scope.addNewPlayer = function () {
-        var playerName = $scope.newTeamPlayer;
-
-        if (TeamService.emptyValidation(playerName)) {
-            if (TeamService.checkIfUnique(playerName, players)) {
+        if ($scope.newTeamPlayer !== '') {
+            if (players.indexOf($scope.newTeamPlayer) === -1) {
                 disableError();
-
-                $scope.players.push(playerName);
-                $scope.playerNumber = players.length;
+                $scope.players.push($scope.newTeamPlayer);
             }
             else {
                 setError('Player already added.');
             }
         }
-        $scope.showFormError = true;
+        else {
+            $scope.showFormError = true;
+        }
     };
 
     $scope.makeMatch = function () {
@@ -39,6 +36,8 @@ angular.module('app').controller('TeamCtrl', function($scope, $location, TeamSer
             TeamService.savePlayers(players);
             $location.url('/match');
         }
-        setError('Too few players');
+        else {
+            setError('Too few players');
+        }
     };
 });

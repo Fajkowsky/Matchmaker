@@ -7,7 +7,7 @@ angular.module('app').controller('NameCtrl', function ($scope, $location, TeamSe
     $scope.saveName = function () {
         var name = $scope.teamName;
 
-        if (TeamService.emptyValidation(name)) {
+        if (name !== '') {
             TeamService.saveName(name);
             $location.url('/team');
         }
