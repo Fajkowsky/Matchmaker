@@ -10,14 +10,20 @@
 <body ng-app="app">
 <div ng-view></div>
 
-<script src="angular.min.js"></script>
-<script src="angular-route.min.js"></script>
+<!-- libraries -->
+<script src="bower_components/angularjs/angular.min.js"></script>
+<script src="bower_components/angular-route/angular-route.min.js"></script>
+
+<!-- main app -->
 <script src="app.js"></script>
 
+<!-- services -->
 <script src="js/services/teamService.js"></script>
 
+<!-- directives -->
 <script src="js/directives/resetData.js"></script>
 
+<!-- controllers -->
 <script src="js/controllers/nameCtrl.js"></script>
 <script src="js/controllers/teamCtrl.js"></script>
 <script src="js/controllers/matchCtrl.js"></script>
