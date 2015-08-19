@@ -2,18 +2,20 @@
     'use strict';
 
     angular.module('app').controller('NameCtrl', function ($scope, $location, TeamService) {
-        $scope.teamName = '';
-        $scope.showError = false;
+        var nameCtrl = $scope.nameCtrl = {
+            teamName: '',
+            showError: false
+        };
 
-        $scope.saveName = function () {
-            var name = $scope.teamName;
+        nameCtrl.saveName = function () {
+            var name = nameCtrl.teamName;
 
             if (name !== '') {
                 TeamService.saveName(name);
                 $location.url('/team');
             }
             else {
-                $scope.showError = true;
+                nameCtrl.showError = true;
             }
         };
     });

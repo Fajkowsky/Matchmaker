@@ -2,7 +2,9 @@
     'use strict';
 
     angular.module('app').controller('MatchCtrl', function ($scope, TeamService) {
-        $scope.name = TeamService.getName();
-        $scope.players = TeamService.getPlayers().join(', ');
+        var matchCtrl = $scope.matchCtrl = {
+            name: TeamService.getName(),
+            players: TeamService.getPlayers().join(', ')
+        };
     });
 })();

@@ -2,39 +2,43 @@
     'use strict';
 
     angular.module('app').controller('TeamCtrl', function ($scope, $location, TeamService) {
-        $scope.team = TeamService.getName();
-        var players = $scope.players = [];
-        $scope.newTeamPlayer = $scope.matchError = '';
-        $scope.showFormError = $scope.showMatchError = false;
+        var teamCtrl = $scope.teamCtrl = {
+            team: TeamService.getName(),
+            players: [],
+            newTeamPlayer: '',
+            matchError: '',
+            showFormError: false,
+            showMatchError: false,
+        };
 
         function setError(msg) {
-            $scope.showMatchError = true;
-            $scope.matchError = msg;
+            teamCtrl.showMatchError = true;
+            teamCtrl.matchError = msg;
         }
 
         function disableError() {
-            $scope.showMatchError = false;
-            $scope.matchError = '';
+            teamCtrl.showMatchError = false;
+            teamCtrl.matchError = '';
         }
 
-        $scope.addNewPlayer = function () {
-            if ($scope.newTeamPlayer !== '') {
-                if (players.indexOf($scope.newTeamPlayer) === -1) {
+        teamCtrl.addNewPlayer = function () {
+            if (teamCtrl.newTeamPlayer !== '') {
+                if (teamCtrl.players.indexOf(teamCtrl.newTeamPlayer) === -1) {
                     disableError();
-                    $scope.players.push($scope.newTeamPlayer);
+                    teamCtrl.players.push(teamCtrl.newTeamPlayer);
                 }
                 else {
                     setError('Player already added.');
                 }
             }
             else {
-                $scope.showFormError = true;
+                teamCtrl.showFormError = true;
             }
         };
 
-        $scope.makeMatch = function () {
-            if (players.length > 1) {
-                TeamService.savePlayers(players);
+        teamCtrl.makeMatch = function () {
+            if (teamCtrl.players.length > 1) {
+                TeamService.savePlayers(teamCtrl.players);
                 $location.url('/match');
             }
             else {
