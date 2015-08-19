@@ -1,18 +1,20 @@
-'use strict';
+(function () {
+    'use strict';
 
-angular.module('app').controller('NameCtrl', function ($scope, $location, TeamService) {
-    $scope.teamName = '';
-    $scope.showError = false;
+    angular.module('app').controller('NameCtrl', function ($scope, $location, TeamService) {
+        $scope.teamName = '';
+        $scope.showError = false;
 
-    $scope.saveName = function () {
-        var name = $scope.teamName;
+        $scope.saveName = function () {
+            var name = $scope.teamName;
 
-        if (name !== '') {
-            TeamService.saveName(name);
-            $location.url('/team');
-        }
-        else {
-            $scope.showError = true;
-        }
-    };
-});
+            if (name !== '') {
+                TeamService.saveName(name);
+                $location.url('/team');
+            }
+            else {
+                $scope.showError = true;
+            }
+        };
+    });
+})();
