@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('app').config(function($routeProvider) {
+    angular.module('app').config(function ($routeProvider) {
         $routeProvider.
             when('/', {
                 templateUrl: 'templates/name.html',
@@ -16,4 +16,4 @@
                 controller: 'MatchCtrl'
             });
     });
-}) ();
+})();
