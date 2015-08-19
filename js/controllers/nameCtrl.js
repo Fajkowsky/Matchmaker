@@ -4,18 +4,14 @@
     angular.module('app').controller('NameCtrl', function ($scope, $location, TeamService) {
         var nameCtrl = $scope.nameCtrl = {
             teamName: '',
-            showError: false
+            showError: false,
+            errMsg: 'a'
         };
 
         nameCtrl.saveName = function () {
-            var name = nameCtrl.teamName;
-
-            if (name !== '') {
-                TeamService.saveName(name);
+            if (!nameCtrl.showError) {
+                TeamService.saveName(nameCtrl.teamName);
                 $location.url('/team');
-            }
-            else {
-                nameCtrl.showError = true;
             }
         };
     });

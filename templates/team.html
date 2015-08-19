@@ -1,9 +1,9 @@
 <h1>Your team name: {{teamCtrl.team}}</h1>
 <h2>Total players: {{teamCtrl.players.length}}</h2>
 <form name="playerForm">
-    <input type="text" name="playerName" ng-model="teamCtrl.newTeamPlayer" focus-field required/>
+    <input type="text" name="playerName" ng-model="teamCtrl.newTeamPlayer" validate-field="teamCtrl" focus-field/>
     <div ng-show="teamCtrl.showMatchError">{{teamCtrl.matchError}}</div>
-    <div ng-show="teamCtrl.showFormError && playerForm.playerName.$error.required">Required</div>
+    <div ng-show="teamCtrl.showError">{{teamCtrl.errMsg}}</div>
     <button ng-click="teamCtrl.makeMatch()">Make match</button>
     <button ng-click="teamCtrl.addNewPlayer()">Add Player</button>
     <reset-data></reset-data>
