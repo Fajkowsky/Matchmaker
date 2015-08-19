@@ -1,14 +1,14 @@
-<h1>Your team name: {{team}}</h1>
-<h2>Total players: {{players.length}}</h2>
+<h1>Your team name: {{teamCtrl.team}}</h1>
+<h2>Total players: {{teamCtrl.players.length}}</h2>
 <form name="playerForm">
-    <input type="text" name="playerName" ng-model="newTeamPlayer" required/>
-    <div ng-show="showFormError && playerForm.playerName.$error.required">Required</div>
+    <input type="text" name="playerName" ng-model="teamCtrl.newTeamPlayer" focus-field required/>
+    <div ng-show="teamCtrl.showMatchError">{{teamCtrl.matchError}}</div>
+    <div ng-show="teamCtrl.showFormError && playerForm.playerName.$error.required">Required</div>
+    <button ng-click="teamCtrl.makeMatch()">Make match</button>
+    <button ng-click="teamCtrl.addNewPlayer()">Add Player</button>
+    <reset-data></reset-data>
 </form>
-<button ng-click="addNewPlayer()">Add Player</button>
-<button ng-click="makeMatch()">Make match</button>
-<reset-data></reset-data>
-<div ng-show="showMatchError">{{matchError}}</div>
 
-<ul ng-repeat="player in players track by $index">
+<ul ng-repeat="player in teamCtrl.players track by $index">
     <li>{{player}}</li>
 </ul>
