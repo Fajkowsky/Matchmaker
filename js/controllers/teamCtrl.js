@@ -7,8 +7,9 @@
             players: [],
             newTeamPlayer: '',
             matchError: '',
-            showFormError: false,
             showMatchError: false,
+            showError: false,
+            errMsg: 'a'
         };
 
         function setError(msg) {
@@ -22,7 +23,7 @@
         }
 
         teamCtrl.addNewPlayer = function () {
-            if (teamCtrl.newTeamPlayer !== '') {
+            if (teamCtrl.showError) {
                 if (teamCtrl.players.indexOf(teamCtrl.newTeamPlayer) === -1) {
                     disableError();
                     teamCtrl.players.push(teamCtrl.newTeamPlayer);
@@ -30,9 +31,6 @@
                 else {
                     setError('Player already added.');
                 }
-            }
-            else {
-                teamCtrl.showFormError = true;
             }
         };
 

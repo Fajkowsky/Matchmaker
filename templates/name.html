@@ -1,6 +1,6 @@
 <h1>Give your match name: </h1>
 <form name="nameForm">
-    <input type="text" name="teamName" ng-model="nameCtrl.teamName" focus-field required/>
-    <span class="error" ng-show="nameForm.teamName.$error.required && nameCtrl.showError">Required!</span>
+    <input type="text" name="teamName" ng-model="nameCtrl.teamName" validate-field="nameCtrl" focus-field/>
+    <span class="error" ng-show="nameCtrl.showError">{{nameCtrl.errMsg}}</span>
     <button type="submit" ng-click="nameCtrl.saveName()">Save team</button>
 </form>
