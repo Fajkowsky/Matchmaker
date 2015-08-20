@@ -1,6 +1,8 @@
 <h1>Give your match name: </h1>
 <form name="nameForm">
-    <input type="text" name="teamName" ng-model="nameCtrl.teamName" validate-field="nameCtrl" focus-field/>
-    <span class="error" ng-show="nameCtrl.showError">{{nameCtrl.errMsg}}</span>
-    <button type="submit" ng-click="nameCtrl.saveName()">Save team</button>
+    <input type="text" name="teamName" ng-model="nameCtrl.teamName" focus-field/>
+    <div ng-show="nameForm.$submitted || nameForm.nameCtrl.teamName.$touched">
+        <div ng-show="nameForm.nameCtrl.teamName.$error.required">Tell us your name.</div>
+    </div>
+    <input type="submit" ng-click="nameCtrl.saveName()" value="Save team name" />
 </form>

@@ -1,7 +1,7 @@
 <h1>Your team name: {{teamCtrl.team}}</h1>
 <h2>Total players: {{teamCtrl.players.length}}</h2>
 <form name="playerForm">
-    <input type="text" name="playerName" ng-model="teamCtrl.newTeamPlayer" validate-field="teamCtrl" focus-field/>
+    <input type="text" name="playerName" ng-model="teamCtrl.newTeamPlayer" focus-field required/>
     <div ng-show="teamCtrl.showMatchError">{{teamCtrl.matchError}}</div>
     <div ng-show="teamCtrl.showError">{{teamCtrl.errMsg}}</div>
     <button ng-click="teamCtrl.makeMatch()">Make match</button>
@@ -9,6 +9,6 @@
     <reset-data></reset-data>
 </form>
 
-<ul ng-repeat="player in teamCtrl.players track by $index">
+<ul ng-repeat="player in teamCtrl.players">
     <li>{{player}}</li>
 </ul>

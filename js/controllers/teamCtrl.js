@@ -9,7 +9,7 @@
             matchError: '',
             showMatchError: false,
             showError: false,
-            errMsg: 'a'
+            errMsg: ''
         };
 
         function setError(msg) {
@@ -23,14 +23,12 @@
         }
 
         teamCtrl.addNewPlayer = function () {
-            if (teamCtrl.showError) {
-                if (teamCtrl.players.indexOf(teamCtrl.newTeamPlayer) === -1) {
-                    disableError();
-                    teamCtrl.players.push(teamCtrl.newTeamPlayer);
-                }
-                else {
-                    setError('Player already added.');
-                }
+            if (teamCtrl.players.indexOf(teamCtrl.newTeamPlayer) === -1) {
+                disableError();
+                teamCtrl.players.push(teamCtrl.newTeamPlayer);
+            }
+            else {
+                setError('Player already added.');
             }
         };
 

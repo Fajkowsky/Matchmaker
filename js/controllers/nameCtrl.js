@@ -5,7 +5,7 @@
         var nameCtrl = $scope.nameCtrl = {
             teamName: '',
             showError: false,
-            errMsg: 'a'
+            errMsg: ''
         };
 
         nameCtrl.saveName = function () {
