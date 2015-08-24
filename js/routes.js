@@ -16,4 +16,4 @@
                 controller: 'MatchCtrl'
             });
     });
-})();
+}());
