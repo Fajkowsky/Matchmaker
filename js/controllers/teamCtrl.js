@@ -5,30 +5,17 @@
         var teamCtrl = $scope.teamCtrl = {
             team: TeamService.getName(),
             players: [],
-            newTeamPlayer: '',
-            matchError: '',
-            showMatchError: false,
-            showError: false,
-            errMsg: ''
+            newTeamPlayer: ''
         };
 
-        function setError(msg) {
-            teamCtrl.showMatchError = true;
-            teamCtrl.matchError = msg;
-        }
-
-        function disableError() {
-            teamCtrl.showMatchError = false;
-            teamCtrl.matchError = '';
-        }
-
         teamCtrl.addNewPlayer = function () {
-            if (teamCtrl.players.indexOf(teamCtrl.newTeamPlayer) === -1) {
-                disableError();
+            if ($scope.playerForm.$valid) {
                 teamCtrl.players.push(teamCtrl.newTeamPlayer);
+                teamCtrl.newTeamPlayer = '';
+                $scope.playerForm.$setPristine();
             }
             else {
-                setError('Player already added.');
+                $scope.playerForm.$setDirty();
             }
         };
 
@@ -36,9 +23,6 @@
             if (teamCtrl.players.length > 1) {
                 TeamService.savePlayers(teamCtrl.players);
                 $location.url('/match');
-            }
-            else {
-                setError('Too few players');
             }
         };
     });
