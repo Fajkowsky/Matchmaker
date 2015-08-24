@@ -13,17 +13,14 @@
                 teamCtrl.players.push(teamCtrl.newTeamPlayer);
                 teamCtrl.newTeamPlayer = '';
                 $scope.playerForm.$setPristine();
-            }
-            else {
+            } else {
                 $scope.playerForm.$setDirty();
             }
         };
 
         teamCtrl.makeMatch = function () {
-            if (teamCtrl.players.length > 1) {
-                TeamService.savePlayers(teamCtrl.players);
-                $location.url('/match');
-            }
+            TeamService.savePlayers(teamCtrl.players);
+            $location.url('/match');
         };
     });
 })();
