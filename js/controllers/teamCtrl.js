@@ -4,6 +4,7 @@
     angular.module('app').controller('TeamCtrl', function ($scope, $location, TeamService) {
         var teamCtrl = $scope.teamCtrl = {
             team: TeamService.getName(),
+            minialPlayersAmount: 2,
             players: [],
             newTeamPlayer: ''
         };
@@ -23,4 +24,4 @@
             $location.url('/match');
         };
     });
-})();
+}());
