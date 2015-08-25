@@ -4,8 +4,8 @@
     <input type="text" name="playerName" ng-model="teamCtrl.newTeamPlayer" focus-field unique="teamCtrl.players" required/>
     <div ng-show="playerForm.$dirty && playerForm.playerName.$error.required">This field is required!</div>
     <div ng-show="playerForm.$dirty && playerForm.playerName.$error.unique">Player already added!</div>
-    <div ng-show="playerForm.$submitted && teamCtrl.players.length < 1">Too few players!</div>
-    <button name="makeMatch" ng-click="teamCtrl.players.length > 2 && teamCtrl.makeMatch()">Make match</button>
+    <div ng-show="teamCtrl.players.length < teamCtrl.minialPlayersAmount">Too few players to make match!</div>
+    <button name="makeMatch" ng-click="teamCtrl.players.length >= teamCtrl.minialPlayersAmount && teamCtrl.makeMatch()">Make match</button>
     <button ng-click="teamCtrl.addNewPlayer()">Add Player</button>
     <reset-data></reset-data>
 </form>
