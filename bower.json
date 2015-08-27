@@ -19,6 +19,7 @@
     "tests"
   ],
   "dependencies": {
+    "angular-messages": "~1.4.4",
     "angular-route": "~1.4.4",
     "angularjs": "~1.4.4"
   }

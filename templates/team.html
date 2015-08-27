@@ -2,12 +2,16 @@
 <h2>Total players: {{teamCtrl.players.length}}</h2>
 <form name="playerForm" novalidate>
     <input type="text" name="playerName" ng-model="teamCtrl.newTeamPlayer" focus-field unique="teamCtrl.players" required/>
-    <div ng-show="playerForm.$dirty && playerForm.playerName.$error.required">This field is required!</div>
-    <div ng-show="playerForm.$dirty && playerForm.playerName.$error.unique">Player already added!</div>
+    <div ng-messages="playerForm.playerName.$error" ng-if="playerForm.playerName.$dirty">
+        <div ng-message="required">This field is required!</div>
+        <div ng-message="unique">Player already added!</div>
+    </div>
     <div ng-show="teamCtrl.players.length < teamCtrl.minialPlayersAmount">Too few players to make match!</div>
     <button name="makeMatch" ng-click="teamCtrl.players.length >= teamCtrl.minialPlayersAmount && teamCtrl.makeMatch()">Make match</button>
     <button ng-click="teamCtrl.addNewPlayer()">Add Player</button>
     <reset-data></reset-data>
+
+
 </form>
 <ul ng-repeat="player in teamCtrl.players track by $index">
     <li>{{player}}</li>
