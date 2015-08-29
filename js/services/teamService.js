@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('app').service('TeamService', function () {
+    angular.module('app').service('TeamService', function ($route) {
         var teamName = '';
         var players = [];
         var step = 0;
@@ -37,8 +37,19 @@
             step = value;
         };
 
-        this.resolveStepUrl = function () {
-            return (ctrlAcces[step].url);
+        this.resolveStepUrl = function (path) {
+            var i, redirect = '/';
+            if (!$route.routes[path]) {
+                redirect = ctrlAcces[step].url;
+            } else {
+                for (i in ctrlAcces) {
+                    if (i <= step) {
+                        redirect = path;
+                        break;
+                    }
+                }
+            }
+            return redirect;
         };
     });
 }());

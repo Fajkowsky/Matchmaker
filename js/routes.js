@@ -18,7 +18,7 @@
             otherwise('/');
     }).run(function ($rootScope, $location, TeamService) {
         $rootScope.$on('$routeChangeStart', function () {
-            var shouldBe = TeamService.resolveStepUrl();
+            var shouldBe = TeamService.resolveStepUrl($location.path());
             $location.path(shouldBe);
         });
     });
