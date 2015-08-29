@@ -1,15 +1,15 @@
 (function () {
     'use strict';
 
-    angular.module('app').service('TeamService', function () {
-        var teamName = '';
-        var players = [];
-        var step = 0;
-        var ctrlAcces = {
-            0 : {url: '/', ctrl: 'NameCtrl'},
-            1 : {url: '/team', ctrl: 'TeamCtrl'},
-            2 : {url: '/match', ctrl: 'MatchCtrl'}
-        };
+    angular.module('app').service('TeamService', function ($route) {
+        var teamName = '',
+            players = [],
+            step = 0,
+            ctrlAccess = [
+                {url: '/', ctrl: 'NameCtrl', step: 0},
+                {url: '/team', ctrl: 'TeamCtrl', step: 1},
+                {url: '/match', ctrl: 'MatchCtrl', step: 2}
+            ];
 
         this.saveName = function (name) {
             teamName = name;
@@ -37,8 +37,18 @@
             step = value;
         };
 
-        this.resolveStepUrl = function () {
-            return (ctrlAcces[step].url);
+        this.resolveStepUrl = function (path) {
+            var i, redirect;
+            if (!$route.routes[path]) {
+                redirect = ctrlAccess[step].url;
+            } else {
+                for (i = 0; i < ctrlAccess.length; i++) {
+                    if (ctrlAccess[i].step <= step) {
+                        redirect = ctrlAccess[i].url;
+                    }
+                }
+            }
+            return redirect;
         };
     });
 }());
