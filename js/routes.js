@@ -14,6 +14,12 @@
             when('/match', {
                 templateUrl: 'templates/match.html',
                 controller: 'MatchCtrl'
-            });
+            }).
+            otherwise('/');
+    }).run(function ($rootScope, $location, TeamService) {
+        $rootScope.$on('$routeChangeStart', function () {
+            var shouldBe = TeamService.resolveStepUrl();
+            $location.path(shouldBe);
+        });
     });
 }());
