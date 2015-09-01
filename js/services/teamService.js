@@ -61,13 +61,8 @@
 
         this.restoreLocalStorageData = function () {
             var matchStr = localStorage.getItem('match');
-            var matchObj = JSON.parse(matchStr);
 
-            match = {
-                players: matchObj.players,
-                teamName: matchObj.teamName,
-                step: matchObj.step
-            };
+            match = JSON.parse(matchStr);
         };
 
         function saveToLocalStorage() {
