@@ -13,6 +13,7 @@
 
         this.saveName = function (name) {
             teamName = name;
+            saveToLocalStorage();
         };
 
         this.getName = function () {
@@ -21,6 +22,7 @@
 
         this.savePlayers = function (playerArray) {
             players = playerArray;
+            saveToLocalStorage();
         };
 
         this.getPlayers = function () {
@@ -35,6 +37,7 @@
 
         this.setStep = function (value) {
             step = value;
+            saveToLocalStorage();
         };
 
         this.resolveStepUrl = function (path) {
@@ -50,5 +53,14 @@
             }
             return redirect;
         };
+
+        function saveToLocalStorage() {
+            var match = {
+                players: players,
+                teamName: teamName,
+                step: step
+            };
+            localStorage.setItem('match', JSON.stringify(match));
+        }
     });
 }());
