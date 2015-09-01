@@ -2,9 +2,11 @@
     'use strict';
 
     angular.module('app').service('TeamService', function ($route) {
-        var teamName = '',
-            players = [],
-            step = 0,
+        var match = {
+                players: [],
+                teamName: '',
+                step: 0
+            },
             ctrlAccess = [
                 {url: '/', ctrl: 'NameCtrl', step: 0},
                 {url: '/team', ctrl: 'TeamCtrl', step: 1},
@@ -12,41 +14,44 @@
             ];
 
         this.saveName = function (name) {
-            teamName = name;
+            match.teamName = name;
             saveToLocalStorage();
         };
 
         this.getName = function () {
-            return teamName;
+            return match.teamName;
         };
 
         this.savePlayers = function (playerArray) {
-            players = playerArray;
+            match.players = playerArray;
             saveToLocalStorage();
         };
 
         this.getPlayers = function () {
-            return players;
+            return match.players;
         };
 
         this.resetData = function () {
-            teamName = '';
-            players = [];
-            step = 0;
+            match = {
+                players: [],
+                teamName: '',
+                step: 0
+            };
+            localStorage.setItem('match', JSON.stringify(match));
         };
 
         this.setStep = function (value) {
-            step = value;
+            match.step = value;
             saveToLocalStorage();
         };
 
         this.resolveStepUrl = function (path) {
             var i, redirect;
             if (!$route.routes[path]) {
-                redirect = ctrlAccess[step].url;
+                redirect = ctrlAccess[match.step].url;
             } else {
                 for (i = 0; i < ctrlAccess.length; i++) {
-                    if (ctrlAccess[i].step <= step) {
+                    if (ctrlAccess[i].step <= match.step) {
                         redirect = ctrlAccess[i].url;
                     }
                 }
@@ -54,12 +59,18 @@
             return redirect;
         };
 
-        function saveToLocalStorage() {
-            var match = {
-                players: players,
-                teamName: teamName,
-                step: step
+        this.restoreLocalStorageData = function () {
+            var matchStr = localStorage.getItem('match');
+            var matchObj = JSON.parse(matchStr);
+
+            match = {
+                players: matchObj.players,
+                teamName: matchObj.teamName,
+                step: matchObj.step
             };
+        };
+
+        function saveToLocalStorage() {
             localStorage.setItem('match', JSON.stringify(match));
         }
     });
