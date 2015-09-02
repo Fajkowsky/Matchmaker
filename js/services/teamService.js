@@ -52,6 +52,9 @@
             } else {
                 for (i = 0; i < ctrlAccess.length; i++) {
                     if (ctrlAccess[i].step <= match.step) {
+                        if (path === ctrlAccess[i].url) {
+                            return path;
+                        }
                         redirect = ctrlAccess[i].url;
                     }
                 }
