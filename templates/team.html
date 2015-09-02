@@ -13,8 +13,12 @@
 
 
 </form>
-<ul ng-repeat="player in teamCtrl.players track by $index">
+<ul ng-repeat="player in teamCtrl.players">
     <li>
-        <div>{{player}}</div>
+        <div ng-mouseenter="teamCtrl.showEditOptions(player)" ng-mouseleave="teamCtrl.hideEditOptions()">{{player}}</div>
+        <div ng-show="teamCtrl.showOptions(player)">
+            <button ng-click="teamCtrl.editPlayer(player)">edytuj</button>
+            <button ng-click="teamCtrl.deletePlayer(player)">usuń</button>
+        </div>
     </li>
 </ul>

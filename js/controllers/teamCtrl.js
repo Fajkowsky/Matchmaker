@@ -6,7 +6,8 @@
             team: TeamService.getName(),
             minimalPlayersAmount: 2,
             players: TeamService.getPlayers(),
-            newTeamPlayer: ''
+            newTeamPlayer: '',
+            editOptions: ''
         };
 
         teamCtrl.addNewPlayer = function () {
@@ -27,6 +28,27 @@
 
         teamCtrl.playersRequired = function () {
             return teamCtrl.players.length < teamCtrl.minimalPlayersAmount;
+        };
+
+        teamCtrl.deletePlayer = function (player) {
+            var index = teamCtrl.players.indexOf(player);
+            teamCtrl.players.splice(index, 1);
+        };
+
+        teamCtrl.editPlayer = function (player) {
+
+        };
+
+        teamCtrl.showOptions = function (player) {
+            return teamCtrl.editOptions === player;
+        };
+
+        teamCtrl.showEditOptions = function (player) {
+            teamCtrl.editOptions = player;
+        };
+
+        teamCtrl.hideEditOptions = function () {
+            teamCtrl.editOptions = '';
         };
     });
 }());
