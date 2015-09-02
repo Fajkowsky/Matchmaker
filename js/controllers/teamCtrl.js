@@ -7,7 +7,7 @@
             minimalPlayersAmount: 2,
             players: TeamService.getPlayers(),
             newTeamPlayer: '',
-            editOptions: ''
+            editOptionsPlayer: ''
         };
 
         teamCtrl.addNewPlayer = function () {
@@ -40,15 +40,15 @@
         };
 
         teamCtrl.showOptions = function (player) {
-            return teamCtrl.editOptions === player;
+            return teamCtrl.editOptionsPlayer === player;
         };
 
         teamCtrl.showEditOptions = function (player) {
-            teamCtrl.editOptions = player;
+            teamCtrl.editOptionsPlayer = player;
         };
 
         teamCtrl.hideEditOptions = function () {
-            teamCtrl.editOptions = '';
+            teamCtrl.editOptionsPlayer = '';
         };
     });
 }());
