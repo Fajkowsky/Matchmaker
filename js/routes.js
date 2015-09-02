@@ -17,8 +17,8 @@
             }).
             otherwise('/');
     }).run(function ($rootScope, $location, TeamService) {
+        TeamService.restoreLocalStorageData();
         $rootScope.$on('$routeChangeStart', function () {
-            TeamService.restoreLocalStorageData();
             var shouldBe = TeamService.resolveStepUrl($location.path());
             $location.path(shouldBe);
         });

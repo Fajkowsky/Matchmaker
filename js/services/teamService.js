@@ -52,6 +52,9 @@
             } else {
                 for (i = 0; i < ctrlAccess.length; i++) {
                     if (ctrlAccess[i].step <= match.step) {
+                        if (path === ctrlAccess[i].url) {
+                            return path;
+                        }
                         redirect = ctrlAccess[i].url;
                     }
                 }
@@ -61,13 +64,8 @@
 
         this.restoreLocalStorageData = function () {
             var matchStr = localStorage.getItem('match');
-            var matchObj = JSON.parse(matchStr);
 
-            match = {
-                players: matchObj.players,
-                teamName: matchObj.teamName,
-                step: matchObj.step
-            };
+            match = JSON.parse(matchStr);
         };
 
         function saveToLocalStorage() {
