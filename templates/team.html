@@ -6,13 +6,15 @@
         <div ng-message="required">This field is required!</div>
         <div ng-message="unique">Player already added!</div>
     </div>
-    <div ng-show="teamCtrl.players.length < teamCtrl.minimalPlayersAmount">Too few players to make match!</div>
-    <button name="makeMatch" ng-click="teamCtrl.players.length >= teamCtrl.minimalPlayersAmount && teamCtrl.makeMatch()">Make match</button>
+    <div ng-show="teamCtrl.playersRequired()">Too few players to make match!</div>
+    <button name="makeMatch" ng-click="!teamCtrl.playersRequired() && teamCtrl.makeMatch()">Make match</button>
     <button ng-click="teamCtrl.addNewPlayer()">Add Player</button>
     <reset-data></reset-data>
 
 
 </form>
 <ul ng-repeat="player in teamCtrl.players track by $index">
-    <li>{{player}}</li>
+    <li>
+        <div>{{player}}</div>
+    </li>
 </ul>

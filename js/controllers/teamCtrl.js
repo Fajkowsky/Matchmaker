@@ -24,5 +24,9 @@
             TeamService.setStep(2);
             $location.url('/match');
         };
+
+        teamCtrl.playersRequired = function () {
+            return teamCtrl.players.length < teamCtrl.minimalPlayersAmount;
+        };
     });
 }());
