@@ -1,18 +1,28 @@
 <h1>Your team name: {{teamCtrl.team}}</h1>
 <h2>Total players: {{teamCtrl.players.length}}</h2>
 <form name="playerForm" novalidate>
-    <input type="text" name="playerName" ng-model="teamCtrl.newTeamPlayer" focus-field unique="teamCtrl.players" required/>
+    <input type="text" name="playerName" ng-model="teamCtrl.playerName" focus-field unique="teamCtrl.players" required/>
     <div ng-messages="playerForm.playerName.$error" ng-if="playerForm.playerName.$dirty">
         <div ng-message="required">This field is required!</div>
         <div ng-message="unique">Player already added!</div>
     </div>
-    <div ng-show="teamCtrl.players.length < teamCtrl.minimalPlayersAmount">Too few players to make match!</div>
-    <button name="makeMatch" ng-click="teamCtrl.players.length >= teamCtrl.minimalPlayersAmount && teamCtrl.makeMatch()">Make match</button>
-    <button ng-click="teamCtrl.addNewPlayer()">Add Player</button>
+    <div ng-show="teamCtrl.playersRequired()">Too few players to make match!</div>
+    <button name="makeMatch" ng-click="!teamCtrl.playersRequired() && teamCtrl.makeMatch()">Make match</button>
+    <button ng-click="teamCtrl.addNewPlayer()">
+        <div ng-hide="teamCtrl.edit.mode">Add player</div>
+        <div ng-show="teamCtrl.edit.mode">Edit player</div>
+    </button>
+    <button name="makeMatch" ng-show="teamCtrl.edit.mode" ng-click="teamCtrl.abortEdit()">Abort edit</button>
     <reset-data></reset-data>
 
 
 </form>
-<ul ng-repeat="player in teamCtrl.players track by $index">
-    <li>{{player}}</li>
+<ul ng-repeat="player in teamCtrl.players">
+    <li ng-mouseenter="teamCtrl.showEditOptions(player)" ng-mouseleave="teamCtrl.hideEditOptions()">
+        <div>{{player}}</div>
+        <div ng-show="teamCtrl.showOptions(player)">
+            <button ng-click="teamCtrl.editPlayer(player)">edit</button>
+            <button ng-click="teamCtrl.deletePlayer(player)">delete</button>
+        </div>
+    </li>
 </ul>
