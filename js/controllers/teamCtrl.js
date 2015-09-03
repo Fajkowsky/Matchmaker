@@ -4,7 +4,7 @@
     angular.module('app').controller('TeamCtrl', function ($scope, $location, TeamService) {
         var teamCtrl = $scope.teamCtrl = {
             team: TeamService.getName(),
-            minimalPlayersAmount: 2,
+            minimalPlayersAmount: 3,
             players: TeamService.getPlayers(),
             playerName: '',
             edit: {
