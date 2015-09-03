@@ -6,14 +6,23 @@
             team: TeamService.getName(),
             minimalPlayersAmount: 2,
             players: TeamService.getPlayers(),
-            newTeamPlayer: '',
-            editOptionsPlayer: ''
+            playerName: '',
+            edit: {
+                optionsPlayer: '',
+                playerIndex: null,
+                mode: false
+            }
         };
 
         teamCtrl.addNewPlayer = function () {
             if ($scope.playerForm.$valid) {
-                teamCtrl.players.push(teamCtrl.newTeamPlayer);
-                teamCtrl.newTeamPlayer = '';
+                if (teamCtrl.edit.mode) {
+                    teamCtrl.players[teamCtrl.edit.playerIndex] = teamCtrl.playerName;
+                    teamCtrl.edit.mode = false;
+                } else {
+                    teamCtrl.players.push(teamCtrl.playerName);
+                }
+                teamCtrl.playerName = '';
                 $scope.playerForm.$setPristine();
             } else {
                 $scope.playerForm.$setDirty();
@@ -36,19 +45,27 @@
         };
 
         teamCtrl.editPlayer = function (player) {
+            var index = teamCtrl.players.indexOf(player);
+            teamCtrl.edit.mode = true;
+            teamCtrl.edit.playerIndex = index;
+            teamCtrl.playerName = teamCtrl.players[index];
+        };
 
+        teamCtrl.abortEdit = function () {
+            teamCtrl.edit.mode = false;
+            teamCtrl.playerName = '';
         };
 
         teamCtrl.showOptions = function (player) {
-            return teamCtrl.editOptionsPlayer === player;
+            return teamCtrl.edit.optionsPlayer === player;
         };
 
         teamCtrl.showEditOptions = function (player) {
-            teamCtrl.editOptionsPlayer = player;
+            teamCtrl.edit.optionsPlayer = player;
         };
 
         teamCtrl.hideEditOptions = function () {
-            teamCtrl.editOptionsPlayer = '';
+            teamCtrl.edit.optionsPlayer = '';
         };
     });
 }());
