@@ -23,6 +23,7 @@
                     teamCtrl.players.push(teamCtrl.playerName);
                 }
                 teamCtrl.playerName = '';
+                teamCtrl.players.sort();
                 $scope.playerForm.$setPristine();
             } else {
                 $scope.playerForm.$setDirty();
